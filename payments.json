@@ -35,7 +35,7 @@
         "fields": {
             "user": "1",
             "date_payment": "2024-02-16",
-            "paid_course": null,
+            "paid_course": "1",
             "paid_lesson": "1",
             "payment_amount": "80",
             "payment_method": "CASH"
