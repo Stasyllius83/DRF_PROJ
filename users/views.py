@@ -1,3 +1,13 @@
 from django.shortcuts import render
+from rest_framework import generics
+from rest_framework.filters import OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
+from .models import Payments
+from .serializers import PaymentsSerializer
 
-# Create your views here.
+class PaymentsListAPIView(generics.ListAPIView):
+    serializer_class = PaymentsSerializer
+    queryset = Payments.objects.all()
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = ['paid_lesson', 'paid_course', 'payment_method']
+    ordering_fields = ['date_payment']

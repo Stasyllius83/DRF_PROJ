@@ -1,0 +1,68 @@
+[
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "email": "staslaty@bk.ru",
+            "phone": "",
+            "city": "Krasnodar",
+            "avatar": ""
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "email": "stasyllius@yandex.ru",
+            "phone": "",
+            "city": "Donetsk",
+            "avatar": ""
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "email": "musician80level@gmail.com",
+            "phone": "",
+            "city": "Vancouver",
+            "avatar": ""
+        }
+    },
+    {
+        "model": "users.payments",
+        "pk": 1,
+        "fields": {
+            "user": "1",
+            "date_payment": "2024-02-16",
+            "paid_course": null,
+            "paid_lesson": "1",
+            "payment_amount": "80",
+            "payment_method": "CASH"
+        }
+    },
+    {
+        "model": "users.payments",
+        "pk": 2,
+        "fields": {
+            "user": "2",
+            "date_payment": "2024-02-16",
+            "paid_course": null,
+            "paid_lesson": "2",
+            "payment_amount": "20",
+            "payment_method": "TRANSFER"
+        }
+    },
+    {
+        "model": "users.payments",
+        "pk": 3,
+        "fields": {
+            "user": "3",
+            "date_payment": "2024-02-16",
+            "paid_course": "1",
+            "paid_lesson": null,
+            "payment_amount": "60",
+            "payment_method": "TRANSFER"
+        }
+    }
+]
