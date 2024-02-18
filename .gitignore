@@ -160,8 +160,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-.dmypy.json
-dmypy.json
+#.dmypy.json
+# dmypy.json
 
 # Pyre type checker
 .pyre/
@@ -187,15 +187,15 @@ poetry.toml
 .ruff_cache/
 
 # LSP config files
-pyrightconfig.json
+#pyrightconfig.json
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+#!.vscode/settings.json
+#!.vscode/tasks.json
+#!.vscode/launch.json
+#!.vscode/extensions.json
+#!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -269,8 +269,8 @@ dlldata.c
 BenchmarkDotNet.Artifacts/
 
 # .NET Core
-project.lock.json
-project.fragment.lock.json
+#project.lock.json
+#project.fragment.lock.json
 artifacts/
 
 # ASP.NET Scaffolding
@@ -350,10 +350,10 @@ _TeamCity*
 
 # AxoCover is a Code Coverage Tool
 .axoCover/*
-!.axoCover/settings.json
+#!.axoCover/settings.json
 
 # Coverlet is a free, cross platform Code Coverage Tool
-coverage*.json
+# coverage*.json
 coverage*.xml
 coverage*.info
 
@@ -603,4 +603,3 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,python,visualstudio
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-
