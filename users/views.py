@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from materials.permissions import IsOwner, IsStaff
+from users.permissions import IsOwner, IsStaff
 from .models import Payments, User
 from .serializers import PaymentsSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated
@@ -30,7 +30,7 @@ class UserCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         new_user = serializer.save()
         password = serializer.data["password"]
-        new_user.set_password("password")
+        new_user.set_password(password)
         new_user.save()
 
 
@@ -48,7 +48,7 @@ class UserUpdateAPIView(generics.UpdateAPIView):
     def perform_update(self, serializer):
         new_user = serializer.save()
         password = serializer.data["password"]
-        new_user.set_password("password")
+        new_user.set_password(password)
         new_user.save()
 
 
