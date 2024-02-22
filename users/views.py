@@ -37,7 +37,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated, IsOwner|IsStaff]
+    permission_classes = [IsAuthenticated]
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
@@ -47,8 +47,6 @@ class UserUpdateAPIView(generics.UpdateAPIView):
 
     def perform_update(self, serializer):
         new_user = serializer.save()
-        password = serializer.data["password"]
-        new_user.set_password(password)
         new_user.save()
 
 
