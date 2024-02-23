@@ -8,19 +8,19 @@ from materials.serializers import CourseSerializer, LessonSerializer
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
     def get_permissions(self):
         if self.action == 'create':
-            self.permission_classes = [IsOwner, ~IsStaff]
+            self.permission_classes = [IsAuthenticated, ~IsStaff]
         elif self.action == 'list':
-            self.permission_classes = [IsOwner|IsStaff]
+            self.permission_classes = [IsAuthenticated, IsOwner|IsStaff]
         elif self.action == 'retrieve':
-            self.permission_classes = [IsOwner|IsStaff]
+            self.permission_classes = [IsAuthenticated, IsOwner|IsStaff]
         elif self.action == 'update':
-            self.permission_classes = [IsOwner|IsStaff]
+            self.permission_classes = [IsAuthenticated, IsOwner|IsStaff]
         elif self.action == 'destroy':
-            self.permission_classes = [IsOwner]
+            self.permission_classes = [IsAuthenticated, IsOwner]
         return [permission() for permission in self.permission_classes]
 
     def perform_create(self, serializer):
@@ -31,7 +31,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonSerializer
-    permission_classes = [IsAuthenticated, IsOwner, ~IsStaff]
+    permission_classes = [IsAuthenticated, ~IsStaff]
 
     def perform_create(self, serializer):
         new_lesson = serializer.save()
