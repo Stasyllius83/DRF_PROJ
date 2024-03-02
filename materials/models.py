@@ -7,6 +7,7 @@ class Course(models.Model):
     preview = models.ImageField(upload_to='materials/static/img', verbose_name='изображение', null=True, blank=True)
     description = models.TextField(max_length=250, verbose_name='описание')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    price = models.PositiveIntegerField(default=1000, verbose_name='цена')
 
     def __str__(self):
         return f'{self.name} {self.description}'
@@ -43,3 +44,4 @@ class Subscription(models.Model):
     class Meta:
         verbose_name='подписка'
         verbose_name_plural='подписки'
+
