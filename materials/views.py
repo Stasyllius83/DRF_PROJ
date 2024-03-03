@@ -108,10 +108,15 @@ class PaymentCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         course = serializer.validated_data.get('paid_course')
+
         if not course:
             raise serializers.ValidationError('Укажите курс')
         payment = serializer.save()
+
+        if course.price != payment.payment_amount:
+            raise serializers.ValidationError('Укажите верную цену курса')
+
         stripe_price_id = create_stripe_price(payment)
         payment.payment_link, payment.payment_id = create_stripe_session(stripe_price_id)
-        print(payment)
+
         payment.save()

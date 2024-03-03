@@ -21,7 +21,7 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s&j(ri3%m3nm#x738agsf6!t&ck#xo&(_=ck+@1g&@8ytrw1hc'
+SECRET_KEY = os.getenv('DJANGO_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -171,4 +171,25 @@ SWAGGER_SETTINGS = {
     }
 }
 
-STRIPE_API_KEY = 'sk_test_51Opa6HBrpwNVpyjno62fJVT3i9POlMPtQdQLKbwLTP9hg0Pt71WEJ4ZdFCTJUyAt0RBFqrJIc0DeQCX2pzRvcKuW00kvEgzAOk'
+STRIPE_API_KEY = os.getenv('STRIPE_KEY')
+
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_BEAT_SCHEDULE = {
+    'likes-count': {
+        'task': 'materials.tasks.send_moderator_likes_count',
+        'schedule': timedelta(days=1),
+    },
+}
