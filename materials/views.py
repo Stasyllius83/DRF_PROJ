@@ -8,6 +8,7 @@ from materials.serializers import CourseSerializer, LessonSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from materials.services import create_stripe_price, create_stripe_session
+from materials.tasks import check_subscribe_course
 from users.models import Payments
 from users.serializers import PaymentsSerializer
 
@@ -35,6 +36,11 @@ class CourseViewSet(viewsets.ModelViewSet):
         new_course = serializer.save()
         new_course.owner = self.request.user
         new_course.save()
+
+    def perform_update(self, serializer):
+        update_course = serializer.save()
+        check_subscribe_course.delay(update_course.id)
+        update_course.save()
 
 
 class LessonCreateAPIView(generics.CreateAPIView):

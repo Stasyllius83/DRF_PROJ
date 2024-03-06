@@ -2,6 +2,7 @@ from django.db import models
 from config import settings
 
 
+
 class Course(models.Model):
     name = models.CharField(max_length=100, verbose_name='название')
     preview = models.ImageField(upload_to='materials/static/img', verbose_name='изображение', null=True, blank=True)
@@ -44,4 +45,3 @@ class Subscription(models.Model):
     class Meta:
         verbose_name='подписка'
         verbose_name_plural='подписки'
-

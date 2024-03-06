@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'corsheaders',
+    'django_celery_beat',
 
     'users',
     'materials',
@@ -188,8 +189,8 @@ CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 CELERY_BEAT_SCHEDULE = {
-    'likes-count': {
-        'task': 'materials.tasks.send_moderator_likes_count',
-        'schedule': timedelta(days=1),
+    'deactivate_user': {
+        'task': 'materials.tasks.deactivate_user',
+        'schedule': timedelta(minutes=1),
     },
 }
