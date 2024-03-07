@@ -33,9 +33,7 @@ def deactivate_user():
         is_staff=False,
         is_superuser=False
     )
-    logging.info({users})
+
     for user in users:
-        logging.info({user})
-        logging.info({user.email})
-        logging.info({user.last_login})
+        logging.info(f'Пользователь {user} заблокирован')
     users.update(is_active=False)
