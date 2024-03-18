@@ -9,10 +9,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-from datetime import timedelta
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
@@ -156,9 +158,13 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',  # Замените на адрес вашего фронтенд-сервера
+    "https://read-only.example.com",
+    "https://read-and-write.example.com",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.example.com",
+]
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -188,6 +194,9 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Флаг отслеживания выполнения задач
+CELERY_TASK_TRACK_STARTED = True
 
 CELERY_BEAT_SCHEDULE = {
     'deactivate_user': {
