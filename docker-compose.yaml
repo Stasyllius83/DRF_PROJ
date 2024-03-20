@@ -12,8 +12,10 @@ services:
       - pg_data:/var/lib/postgressql/data/pgdata
     ports:
       - '5433:5432'
+    networks:
+      - drf_net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_NAME}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -21,11 +23,13 @@ services:
   app:
     build: .
     tty: true
-    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     env_file:
       - .env
     ports:
       - '8000:8000'
+    networks:
+      - drf_net
     volumes:
       - .:/code
     depends_on:
@@ -36,6 +40,8 @@ services:
     image: redis:alpine
     ports:
       - '6380:6379'
+    networks:
+      - drf_net
 
   celery:
     build: .
@@ -44,6 +50,8 @@ services:
     depends_on:
       - redis
       - app
+    networks:
+      - drf_net
 
   celery_beat:
     build: .
@@ -53,7 +61,12 @@ services:
     depends_on:
       - redis
       - app
-
+    networks:
+      - drf_net
 
 volumes:
   pg_data:
+
+networks:
+  drf_net:
+    driver: bridge
